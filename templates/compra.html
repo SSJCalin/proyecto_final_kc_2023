@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compra - Registro de Inversiones</title>
+    <!-- Agregar los enlaces a Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Agregar estilos personalizados -->
+    <style>
+        body {
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 500px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .btn {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Compra - Registro de Inversiones</h1>
+
+        <!-- Botones de navegación -->
+        <div class="text-center mb-4">
+            <a class="btn btn-primary mx-2" href="{{ url_for('index') }}">Inicio</a>
+            <a class="btn btn-primary mx-2" href="{{ url_for('compra') }}">Compra</a>
+            <a class="btn btn-primary mx-2" href="{{ url_for('status') }}">Estado de Inversiones</a>
+        </div>
+
+        <!-- Apartado Comprar -->
+        <div class="form-group">
+            <label for="comprar_from">Comprar From:</label>
+            <select class="form-control" id="comprar_from">
+                <option>EUR</option>
+                <option>BTC</option>
+                <option>ETH</option>
+                <option>XUSDT</option>
+                <option>BNB</option>
+                <option>XRP</option>
+                <option>ADA</option>
+                <option>SOL</option>
+                <option>DOT</option>
+                <option>MATIC</option>
+                <!-- Agrega las demás opciones de monedas aquí -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="comprar_to">Comprar To:</label>
+            <select class="form-control" id="comprar_to">
+                <option>EUR</option>
+                <option>BTC</option>
+                <option>ETH</option>
+                <option>XUSDT</option>
+                <option>BNB</option>
+                <option>XRP</option>
+                <option>ADA</option>
+                <option>SOL</option>
+                <option>DOT</option>
+                <option>MATIC</option>
+                <!-- Agrega las demás opciones de monedas aquí -->
+            </select>
+        </div>
+        <!-- Apartado Comprar -->
+
+        <div class="form-group">
+            <label for="cantidad_comprar">Cantidad:</label>
+            <input type="number" class="form-control" id="cantidad_comprar" min="0" step="0.0001">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" id="calcular_compra" onclick="calcularResultado()">Calcular</button>
+            <button class="btn btn-primary" id="btn_comprar">Comprar</button>
+        </div>
+
+        <div class="form-group">
+            <label for="resultado">Resultado:</label>
+            <input type="text" class="form-control" id="resultado" readonly>
+        </div>
+
+        <!-- Apartado Vender -->
+        <div class="form-group">
+            <label for="vender_from">Vender From:</label>
+            <select class="form-control" id="vender_from">
+                <option>EUR</option>
+                <option>BTC</option>
+                <option>ETH</option>
+                <option>XUSDT</option>
+                <option>BNB</option>
+                <option>XRP</option>
+                <option>ADA</option>
+                <option>SOL</option>
+                <option>DOT</option>
+                <option>MATIC</option>
+                <!-- Agrega las demás opciones de monedas aquí -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="vender_to">Vender To:</label>
+            <select class="form-control" id="vender_to">
+                <option>EUR</option>
+                <option>BTC</option>
+                <option>ETH</option>
+                <option>XUSDT</option>
+                <option>BNB</option>
+                <option>XRP</option>
+                <option>ADA</option>
+                <option>SOL</option>
+                <option>DOT</option>
+                <option>MATIC</option>
+                <!-- Agrega las demás opciones de monedas aquí -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="cantidad_vender">Cantidad:</label>
+            <input type="number" class="form-control" id="cantidad_vender" min="0" step="0.0001">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" id="btn_vender">Vender</button>
+        </div>
+
+        <!-- Apartado Tradear -->
+        <div class="form-group">
+            <label for="tradear_from">Tradear From:</label>
+            <select class="form-control" id="tradear_from">
+                <option>EUR</option>
+                <option>BTC</option>
+                <option>ETH</option>
+                <option>XUSDT</option>
+                <option>BNB</option>
+                <option>XRP</option>
+                <option>ADA</option>
+                <option>SOL</option>
+                <option>DOT</option>
+                <option>MATIC</option>
+                <!-- Agrega las demás opciones de monedas aquí -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tradear_to">Tradear To:</label>
+            <select class="form-control" id="tradear_to">
+                <option>EUR</option>
+                <option>BTC</option>
+                <option>ETH</option>
+                <option>XUSDT</option>
+                <option>BNB</option>
+                <option>XRP</option>
+                <option>ADA</option>
+                <option>SOL</option>
+                <option>DOT</option>
+                <option>MATIC</option>
+                <!-- Agrega las demás opciones de monedas aquí -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="cantidad_tradear">Cantidad:</label>
+            <input type="number" class="form-control" id="cantidad_tradear" min="0" step="0.0001">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" id="btn_tradear">Tradear</button>
+        </div>
+    </div>
+
+    <!-- Agregar los enlaces a Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function calcularResultado() {
+            const fromCurrency = document.getElementById('comprar_from').value;
+            const toCurrency = document.getElementById('comprar_to').value;
+            const cantidad = parseFloat(document.getElementById('cantidad_comprar').value);
+
+            // Construir la URL de la API de CoinAPI
+            const API_KEY = '9F853224-721A-4CB4-B96F-A389898A5023';
+            const url = `https://rest.coinapi.io/v1/exchangerate/${fromCurrency}/${toCurrency}?apikey=${API_KEY}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const exchangeRate = data.rate;
+                    const valorEquivalente = cantidad * exchangeRate;
+                    document.getElementById('resultado').value = `${cantidad} ${fromCurrency} equivalen a ${valorEquivalente.toFixed(2)} ${toCurrency}.`;
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud a la API:', error);
+                    document.getElementById('resultado').value = 'Error al obtener el valor.';
+                });
+        }
+
+        document.getElementById('btn_comprar').addEventListener('click', function() {
+            // Agregar el cuadro de diálogo para la compra exitosa
+            alert('Compra realizada con éxito');
+            // Redirigir a la página de inicio después de la compra exitosa
+            window.location.href = '/';
+        });
+    </script>
+</body>
+</html>
