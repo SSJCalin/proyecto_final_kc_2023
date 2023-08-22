@@ -2,9 +2,7 @@
 <html>
 <head>
     <title>Inicio - Registro de Inversiones</title>
-    <!-- Agregar los enlaces a Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Agregar estilos personalizados -->
     <style>
         body {
             padding: 20px;
@@ -21,14 +19,12 @@
     <div class="container">
         <h1 class="text-center">Página Principal - Registro de Inversiones</h1>
 
-        <!-- Botones de navegación -->
         <div class="text-center mb-4">
             <a class="btn btn-primary mx-2" href="{{ url_for('index') }}">Inicio</a>
             <a class="btn btn-primary mx-2" href="{{ url_for('compra') }}">Compra</a>
             <a class="btn btn-primary mx-2" href="{{ url_for('status') }}">Estado de Inversiones</a>
         </div>
 
-        <!-- Tabla de movimientos -->
         <h2 class="text-center">Movimientos</h2>
         <table class="table table-bordered table-hover">
             <thead>
@@ -45,18 +41,13 @@
             <tbody>
                 {% for movimiento in movimientos %}
                 <tr>
-                    <td>{{ movimiento[4] }}</td>
-                    <td>{{ movimiento[5] }}</td>
-                    <td>{{ movimiento[1] }}</td>
-                    <td>{{ movimiento[2] }}</td>
-                    {% if movimiento[3] == 'Compra' %}
-                        <td>EUR</td>
-                        <td>{{ get_crypto_value(movimiento[1]) * movimiento[2] }}</td>
-                    {% else %}
-                        <td>-</td>
-                        <td>-</td>
-                    {% endif %}
-                    <td>{{ movimiento[3] }}</td>
+                    <td>{{ movimiento.fecha }}</td>
+                    <td>{{ movimiento.hora }}</td>
+                    <td>{{ movimiento.moneda_from }}</td>
+                    <td>{{ movimiento.amount }}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{ movimiento.type }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -64,7 +55,6 @@
 
     </div>
 
-    <!-- Agregar los enlaces a Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
